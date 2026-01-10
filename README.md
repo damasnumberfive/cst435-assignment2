@@ -56,7 +56,7 @@ CST435-ASSIGNMENT2/
 
 ### **Clone Repository**
 ```bash
-git clone https://github.com/damasnumberfive/CST435-Assignment2.git
+git clone https://github.com/damasnumberfive/cst435-assignment2.git
 cd CST435-Assignment2
 ```
 
@@ -85,8 +85,8 @@ sudo apt update
 sudo apt install -y python3-pip python3-numpy python3-pil python3-matplotlib unzip zip
 
 # Create project directory
-mkdir ~/CST435-ASSIGNMENT2
-cd ~/CST435-ASSIGNMENT2
+mkdir ~/cst435-assignment2
+cd ~/cst435-assignment2
 ```
 
 ### **3. Upload Files**
@@ -141,12 +141,12 @@ zip -r results.zip results/
 
 Formula: `Speedup(N) = T₁ ÷ Tₙ`
 
-| Workers | Multiprocessing | Concurrent Futures | Ideal (Linear) |
-|---------|-----------------|-------------------|----------------|
-| 1       | 1.00x          | 1.00x            | 1.00x          |
-| 2       | 1.97x          | 1.98x            | 2.00x          |
-| 4       | 2.40x          | 2.39x            | 4.00x          |
-| 8       | 2.39x          | 2.36x            | 8.00x          |
+| Workers | Multiprocessing | Concurrent Futures |
+|---------|-----------------|-------------------|
+| 1       | 1.00x          | 1.00x            | 
+| 2       | 1.97x          | 1.98x            | 
+| 4       | 2.40x          | 2.39x            | 
+| 8       | 2.39x          | 2.36x            | 
 
 ### **Parallel Efficiency**
 
@@ -176,7 +176,8 @@ Formula: `Efficiency(N) = [Speedup(N) ÷ N] × 100%`
 - Provides cleaner code structure and better error handling
 - Slightly more overhead but easier to work with
 
-**Performance Comparison:** Both approaches achieve similar results, with multiprocessing being marginally faster (~0.3-0.4s) due to lower abstraction overhead.
+**Performance Comparison:** 
+-Both approaches achieve similar results, with multiprocessing being marginally faster (~0.3-0.4s) due to lower abstraction overhead.
 ---
 
 ## Technologies Used
