@@ -1,6 +1,6 @@
 # CST435 Assignment 2: Parallel Image Processing System
 
-## 📋 Project Overview
+##  Project Overview
 
 This project implements a parallel image processing system that applies various image filters using two different parallel programming paradigms in Python: **multiprocessing** and **concurrent.futures**. The system processes images from the Food-101 dataset and compares the performance characteristics of multiprocessing and concurrent.futures implementations.
 
@@ -17,7 +17,7 @@ This project implements a parallel image processing system that applies various 
 
 ---
 
-## 🏗️ Project Structure
+##  Project Structure
 
 ```
 CST435-ASSIGNMENT2/
@@ -57,7 +57,7 @@ CST435-ASSIGNMENT2/
 ### **Clone Repository**
 ```bash
 git clone https://github.com/damasnumberfive/cst435-assignment2.git
-cd CST435-Assignment2
+cd cst435-assignment2
 ```
 
 ### **Install Dependencies**
@@ -176,8 +176,8 @@ Formula: `Efficiency(N) = [Speedup(N) ÷ N] × 100%`
 - Provides cleaner code structure and better error handling
 - Slightly more overhead but easier to work with
 
-**Performance Comparison:** 
--Both approaches achieve similar results, with multiprocessing being marginally faster (~0.3-0.4s) due to lower abstraction overhead.
+### **Performance Comparison:** 
+- **Both approaches achieve similar results, with multiprocessing being marginally faster (~0.3-0.4s) due to lower abstraction overhead.**
 ---
 
 ## Technologies Used
