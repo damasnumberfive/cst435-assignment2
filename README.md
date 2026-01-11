@@ -62,8 +62,6 @@ CST435-ASSIGNMENT2/
 
 ### **2. Set Up VM**
 ```bash
-# SSH into VM
-gcloud compute ssh parallel-processing-vm --zone=us-central1-a
 
 # Install dependencies
 sudo apt update
@@ -73,7 +71,6 @@ sudo apt install -y python3-pip python3-numpy python3-pil python3-matplotlib unz
 mkdir ~/cst435-assignment2
 cd ~/cst435-assignment2
 ```
-
 ### **3. Upload Files**
 - Use SSH window: Click **⚙️ gear icon** → **Upload file**
 - Upload your code and images (as zip files)
@@ -85,8 +82,6 @@ cd ~/cst435-assignment2
 ```bash
 # Step 1: Run serial baseline (MUST RUN FIRST)
 python3 src/serial_baseline.py
-
-# This creates serial_baseline_value.csv which is used by both parallel methods
 
 # Step 2: Run multiprocessing (tests with 2, 4, 8 workers)
 python3 src/multiprocessing_image.py
@@ -113,7 +108,7 @@ zip -r results.zip results/
 - **Instance:** e2-standard-8
 - **vCPUs:** 8
 - **Memory:** 32 GB
-- **OS:** Ubuntu 20.04 LTS
+- **OS:** debian-12-bookworm-v20251209
 - **Images Tested:** 1,000 images (20 folders, 50 images per folder)
 - **Total Tasks:** 5,000 (1,000 images × 5 filters)
 
@@ -207,7 +202,7 @@ Formula: `Efficiency(N) = [Speedup(N) ÷ N] × 100%`
 
 ## Video Demonstration
 
-**YouTube Link:** [(https://youtu.be/S1dEaQNGDYo)]
+**YouTube Link:** https://youtu.be/S1dEaQNGDYo
 
 ---
 
