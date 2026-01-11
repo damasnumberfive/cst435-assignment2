@@ -63,14 +63,21 @@ CST435-ASSIGNMENT2/
 ### **2. Set Up VM**
 ```bash
 
-# Install dependencies
+# 1. Install System Basics 
 sudo apt update
-sudo apt install -y python3-pip python3-numpy python3-pil python3-matplotlib unzip zip
+sudo apt install -y python3-pip python3-venv unzip zip
 
-# Create project directory
+# 2. Create directory
 mkdir ~/cst435-assignment2
 cd ~/cst435-assignment2
-```
+
+# 3. Create and Activate Virtual Environment
+python3 -m venv venv
+source venv/bin/activate
+
+# 4. Install Python Libraries (Inside the venv)
+pip install numpy pillow matplotlib
+
 ### **3. Upload Files**
 - Use SSH window: Click **⚙️ gear icon** → **Upload file**
 - Upload your code and images (as zip files)
