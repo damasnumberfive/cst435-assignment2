@@ -207,7 +207,7 @@ Formula: `Efficiency(N) = [Speedup(N) ÷ N] × 100%`
 
 ## Video Demonstration
 
-**YouTube Link:** [Insert link here]
+**YouTube Link:** [(https://youtu.be/S1dEaQNGDYo)]
 
 ---
 
