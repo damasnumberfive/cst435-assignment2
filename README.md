@@ -86,7 +86,6 @@ pip install numpy pillow matplotlib
 
 ### **4. Run the Code**
 
-```bash
 **Important:** Always run the serial baseline first to generate the benchmark values:
 ```bash
 # Step 1: Run serial baseline (MUST RUN FIRST)
