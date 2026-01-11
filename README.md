@@ -13,7 +13,7 @@ This project implements a parallel image processing system that applies various 
 ### **Course Information**
 - **Course:** CST435 - Parallel and Cloud Computing
 - **Semester:** Semester 1 : 2025/2026
-- **Submission Date:** January 11, 2026
+- **Submission Date:** 11 January 2026
 
 ---
 
