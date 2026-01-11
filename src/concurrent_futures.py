@@ -2,21 +2,29 @@ import os
 import time # To measure exactly how long the code takes to run
 import concurrent.futures # A library that provides the ProcessPoolExecutor, which manages the worker processes
 from filters import process_image # Imports function that does the actual work (blurring, edges, etc.) from filters.py
+import csv
+# Serial Benchmark Values Loader
+def load_serial_baseline():
+    """Load the serial baseline from CSV file."""
+    try:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(script_dir)
+        baseline_path = os.path.join(project_root, "serial_baseline_value.csv")
 
+        with open(baseline_path, 'r') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                if row['metric'] == 'serial_baseline':
+                    return float(row['value'])
 
-# Serial benchmark function, no parallelism
-def run_serial_benchmark(image_paths, output_folder):
-    print(f"    Speedup Benchmark: Running Serial Baseline -> ", end=" ", flush=True)
-    start_time = time.time()
-    
-    # Pure loop, no overhead from ProcessPool
-    for img_path in image_paths:
-        process_image(img_path, output_folder)
-        
-    end_time = time.time()
-    duration = end_time - start_time
-    print(f"Done! ({duration:.4f}s)")
-    return duration
+    except FileNotFoundError:
+        print("❌ Error: serial_baseline_value.csv not found!")
+        print("Please run serial_baseline.py first!")
+        exit(1)
+
+    print("❌ Error: serial baseline not found in CSV!")
+    exit(1)
+
 
 # Runs the image processing pipeline with a specific number of workers.
 # Returns the time taken.
@@ -112,14 +120,14 @@ def main():
     print(f"Found {len(image_paths)} images.\n")
 
     # Get the serial baseline time
-    serial_time = run_serial_benchmark(image_paths, SERIAL_OUTPUT)
-    print(f"{'-'*60}\n")
+    serial_time = load_serial_baseline()
+    print(f" Using serial baseline: {serial_time:.4f}s")
 
     # Run the parallel execution 
     print("Starting Parallel Tests...")
     # Use loop to test different worker amounts
-    # We test 1, 2, 4, and 8 workers
-    worker_counts = [1, 2, 4, 8] 
+    # We test 2, 4, and 8 workers
+    worker_counts = [2, 4, 8] 
     results = {}  # To store the times
 
     for count in worker_counts:
@@ -143,4 +151,5 @@ def main():
     print("Test Complete.")
 
 if __name__ == '__main__':
+     # On Windows, multiprocessing requires the main guard
     main()

@@ -2,21 +2,32 @@ import os
 import time
 import multiprocessing
 from filters import process_image 
+import csv
 
-# --- SERIAL BENCHMARK (To match concurrent_futures.py) ---
-def run_serial_benchmark(image_paths, output_folder):
-    print(f"    Speedup Benchmark: Running Serial Baseline -> ", end=" ", flush=True)
-    start_time = time.time()
-    
-    for img_path in image_paths:
-        process_image(img_path, output_folder)
-        
-    end_time = time.time()
-    duration = end_time - start_time
-    print(f"({duration:.4f}s)")
-    return duration
+# Serial Benchmark Values Loader
+def load_serial_baseline():
+    """Load the serial baseline from CSV file."""
+    try:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(script_dir)
+        baseline_path = os.path.join(project_root, "serial_baseline_value.csv")
 
-# --- MULTIPROCESSING TEST FUNCTION ---
+        with open(baseline_path, 'r') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                if row['metric'] == 'serial_baseline':
+                    return float(row['value'])
+
+    except FileNotFoundError:
+        print("❌ Error: serial_baseline_value.csv not found!")
+        print("Please run serial_baseline.py first!")
+        exit(1)
+
+    print("❌ Error: serial baseline not found in CSV!")
+    exit(1)
+
+
+# MULTIPROCESSING TEST FUNCTION 
 def run_test_with_processes(num_processes, image_paths, output_folder):
     # LOAD BALANCING: multiprocessing.Pool automatically distributes the 
     # tasks in the 'tasks' list across the available processes.
@@ -31,12 +42,12 @@ def run_test_with_processes(num_processes, image_paths, output_folder):
     fail_count = 0
     process_stats = {} # Dictionary to count tasks per worker (PID -> Count)
 
-    # ✅ USES multiprocessing.Pool (The Classic Parallel Paradigm)
+    # USES multiprocessing.Pool (The Classic Parallel Paradigm)
     with multiprocessing.Pool(processes=num_processes) as pool:
         # starmap applies the function to the list of tuples (tasks)
         results = pool.starmap(process_image, tasks)
         
-        # --- ANALYZE RESULTS ---
+        # ANALYZE RESULTS 
         for result in results:
             if result.get("status") == "Success":
                 success_count += 1
@@ -55,7 +66,7 @@ def run_test_with_processes(num_processes, image_paths, output_folder):
     print(f"Done! ({duration:.4f}s)")
     print(f"      [Stats] Success: {success_count} | Failed: {fail_count}")
     
-    # --- PRINT WORKER BREAKDOWN (Restored!) ---
+    # PRINT WORKER BREAKDOWN (Restored!) 
     # This proves how the work was distributed (Load Balancing)
     print(f"      [Load Balancing] Process Breakdown:")
     for pid, count in process_stats.items():
@@ -96,13 +107,13 @@ def main():
 
     print(f"Found {len(image_paths)} images.\n")
 
-    # --- STEP 1: GET THE SERIAL BASELINE ---
-    serial_time = run_serial_benchmark(image_paths, SERIAL_OUTPUT)
-    print(f"{'-'*60}\n")
+    # STEP 1: GET THE SERIAL BASELINE 
+    serial_time = load_serial_baseline()
+    print(f"Using serial baseline: {serial_time:.4f}s")
 
-    # --- STEP 2: RUN PARALLEL TESTS ---
+    # STEP 2: RUN PARALLEL TESTS 
     print("Starting Parallel Tests...")
-    process_counts = [1, 2, 4, 8]
+    process_counts = [2, 4, 8]
     results = {} 
 
     for count in process_counts:

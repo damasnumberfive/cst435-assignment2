@@ -14,15 +14,15 @@ def create_charts():
 
 
     # Test Data (Hardcoded from previous multiprocesing and concurrent futures runs)
-    workers = [1, 2, 4, 8]
+    workers = [2, 4, 8]
     
     # Serial Benchmarks to count speedup
-    serial_mp = 33.4079
-    serial_cf = 35.5695
+    serial_mp = 34.87
+    serial_cf = 34.87
 
     # Parallel Execution Times
-    mp_times = [33.7870, 17.1678, 14.0756, 14.1126] 
-    cf_times = [34.4123, 17.3729, 14.4225, 14.5660]
+    mp_times = [17.91, 10.50, 7.82] 
+    cf_times = [17.75, 9.35, 7.59]
 
     # Calculate Speedup and Efficiency
     # 1. Speedup = T_serial / T_parallel
